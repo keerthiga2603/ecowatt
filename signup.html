@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - EcoWatt</title>
+  <!-- Adding Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIq0v8Fq5aG5c5+qF+Jbb5k7/8Myl+Hg0Z+V4/JXpdwSkY7tLgS" crossorigin="anonymous">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Background Image */
+    .background {
+      background-image: url('back1.jpg');
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 80px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    /* Sign Up Form Styles */
+    .signup-form {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 100px auto;
+    }
+
+    .signup-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .signup-form select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .signup-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .signup-form button:hover {
+      background-color: #45a049;
+    }
+
+    .login-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .login-link a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .alert {
+      display: none;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="signup-form">
+      <h2>Sign Up for EcoWatt</h2>
+      <form id="signup-form" onsubmit="return handleSignUp(event)">
+        <input type="text" id="first-name" class="form-control" placeholder="First Name" required>
+        <input type="text" id="last-name" class="form-control" placeholder="Last Name" required>
+        <input type="text" id="username" class="form-control" placeholder="Username" required>
+        <input type="email" id="email" class="form-control" placeholder="Email" required>
+        <input type="password" id="password" class="form-control" placeholder="Password" required>
+        
+        <!-- Solar Panel Installation Address Field -->
+        <input type="text" id="installation-address" class="form-control" placeholder="Installation Address" required>
+
+        <!-- Solar Panel Installation Date Field -->
+        <input type="date" id="installation-date" class="form-control" required>
+        
+        <!-- Solar Panel Type Field -->
+        <select id="panel-type" class="form-control" required>
+          <option value="" disabled selected>Select Panel Type</option>
+          <option value="monocrystalline">Monocrystalline</option>
+          <option value="polycrystalline">Polycrystalline</option>
+          <option value="thin-film">Thin-Film</option>
+        </select>
+        
+        <button type="submit" class="btn btn-success">Sign Up</button>
+      </form>
+      <div class="login-link">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+      <div class="alert alert-success" id="signup-alert">Sign-up successful! You can now log in.</div>
+      <div class="alert alert-danger" id="error-alert">There was an error. Please try again.</div>
+    </div>
+  </main>
+
+  <script>
+    // Handle the sign-up and store user details in localStorage
+    function handleSignUp(event) {
+      event.preventDefault();
+
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const installationAddress = document.getElementById('installation-address').value;
+      const installationDate = document.getElementById('installation-date').value;
+      const panelType = document.getElementById('panel-type').value;
+
+      if (firstName && lastName && username && email && password && installationAddress && installationDate && panelType) {
+        const newUser = { firstName, lastName, username, email, password, installationAddress, installationDate, panelType };
+
+        // Save user details to localStorage
+        localStorage.setItem('user_profile', JSON.stringify(newUser));
+
+        // Display success message and redirect
+        document.getElementById('signup-alert').style.display = 'block';
+        setTimeout(function() {
+          window.location.href = 'login.html'; // Redirect to login page
+        }, 500); // Wait 2 seconds before redirecting
+      } else {
+        document.getElementById('error-alert').style.display = 'block';
+      }
+    }
+  </script>
+
+  <!-- Adding Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyRvyz5Pa6j30yQp8pQfZlXn1/7k8zZpXW6G1C5u5" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-Jh6nMszrX99DmeA22y+CmPmbggw5SBxX3ak56EZtGn1I6OgaEDjDs99cU+PygaYq" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8Fq5aG5c5+qF+Jbb5k7/8Myl+Hg0Z+V4/JXpdwSkY7tLgS" crossorigin="anonymous"></script>
+</body>
+</html>

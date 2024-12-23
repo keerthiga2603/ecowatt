@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoWatt - Login</title>
+  <!-- Adding Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIq0v8Fq5aG5c5+qF+Jbb5k7/8Myl+Hg0Z+V4/JXpdwSkY7tLgS" crossorigin="anonymous">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Background Image */
+    .background {
+      background-image: url('back1.jpg');
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 80px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    /* Login Form Styles */
+    .login-form {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 100px auto;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background-color: #45a049;
+    }
+
+    .signup-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .signup-link a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="login-form" id="login-form">
+      <h2>Login to EcoWatt</h2>
+      <form id="login-form" onsubmit="return validateLogin(event)">
+        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+        <button type="submit" class="btn btn-success">Login</button>
+      </form>
+      <div class="signup-link">
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function validateLogin(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Retrieve the user data from localStorage
+      const user = JSON.parse(localStorage.getItem('user_profile'));
+
+      if (user && user.username === username && user.password === password) {
+        // Redirect to homepage after successful login
+        window.location.href = 'home.html'; // Change this to your homepage URL
+      } else {
+        alert('Invalid username or password');
+      }
+    }
+  </script>
+
+  <!-- Adding Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyRvyz5Pa6j30yQp8pQfZlXn1/7k8zZpXW6G1C5u5" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-Jh6nMszrX99DmeA22y+CmPmbggw5SBxX3ak56EZtGn1I6OgaEDjDs99cU+PygaYq" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8Fq5aG5c5+qF+Jbb5k7/8Myl+Hg0Z+V4/JXpdwSkY7tLgS" crossorigin="anonymous"></script>
+</body>
+</html>
